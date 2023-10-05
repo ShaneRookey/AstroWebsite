@@ -1,0 +1,60 @@
+<div>
+    <h1 class="text-center text-xl">
+        Want to schedule an interview or chat about a project? Get in touch!
+    </h1>
+    <form
+        class="flex flex-col items-center gap-12 py-24"
+        name="contact"
+        data-netlify="true"
+        onsubmit="sendEmail(); reset(); return false;"
+    >
+        <input type="hidden" name="form-name" value="contact" />
+        <div class="flex flex-col gap-2 items-center">
+            <label for="name">Name</label>
+            <input
+                class="w-64 bg-gray-200 px-4 py-2"
+                type="text"
+                id="name"
+                required
+            />
+        </div>
+        <div class="flex flex-col gap-2 items-center">
+            <label for="email">Email</label>
+            <input
+                type="email"
+                id="email"
+                class="w-64 bg-gray-200 px-4 py-2"
+                required
+            />
+        </div>
+        <div class="flex flex-col gap-2 items-center">
+            <label for="message">Message</label>
+            <textarea class="w-64 bg-gray-200 px-4 py-2" id="message" required
+            ></textarea>
+        </div>
+
+        <button
+            type="submit"
+            class="font-bold border border-black w-fit px-5 py-2">Send</button
+        >
+    </form>
+</div>
+
+<script is:inline src="https://smtpjs.com/v3/smtp.js"></script>
+<script is:inline>
+function sendEmail() {
+    Email.send({
+        SecureToken: "fef51d48-eb54-4858-9665-b4d5eb068bfb",
+        To: "shane.r.rookey@gmail.com",
+        From: "shane@shanerookey.com",
+        Subject: "New Contact Form Request from shanerookey.com",
+        Body:
+            "Name: " +
+            document.getElementById("name").value +
+            "<br> Email: " +
+            document.getElementById("email").value +
+            "<br> Message: " +
+            document.getElementById("message").value,
+    }).then((message) => alert(message));
+}
+</script>

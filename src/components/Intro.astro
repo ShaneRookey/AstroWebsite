@@ -1,0 +1,136 @@
+<div>
+    <img
+        class="fixed top-0 -z-10 h-screen w-screen object-cover opacity-20 self-center"
+        src="/yosemite.jpg"
+    />
+    <div class="relative mx-12">
+        <div class="relative">
+            <svg class="absolute h-full w-full overflow-visible" fill="none">
+                <path
+                    id="border-path"
+                    d="M538 253.5V167H2L2 2"
+                    stroke="url(#paint0_linear_6_33)"
+                    stroke-width="3"
+                    stroke-linecap="round"></path>
+                <defs>
+                    <linearGradient
+                        id="paint0_linear_6_33"
+                        x1="2.00009"
+                        y1="50.9998"
+                        x2="589"
+                        y2="275.5"
+                        gradientUnits="userSpaceOnUse"
+                    >
+                        <stop stop-color="#005F60"></stop>
+                        <stop offset="1" stop-color="#FD5901"></stop>
+                    </linearGradient>
+                </defs>
+            </svg>
+            <p id="anim-p" class="p-6 text-lg">
+                Eager and self-driven professional with a passion for
+                excellence. <br />
+                <br />
+                 I aim to channel my expertise in quality assurance and
+                development lifecycles to enhance the customer experience and
+                play a pivotal role in product and company success. My
+                dedication to high-quality results, coupled with an optimistic
+                perspective, is destined to make a significant impact within a
+                dynamic organization that values innovation, effective
+                communication, and steadfast work ethics.
+                <br />
+                <br /> I have 5 years of professional experience in the PV and
+                Renewable energy monitoring industry. I found that I truly enjoy
+                becoming an expert and taking on responsibility with high
+                expectations to execute. I like to be the subject matter expert
+                and am able to learn quickly to fill the gaps that your company
+                needs filled.
+            </p>
+        </div>
+        <div class="flex justify-center pt-12 text-center gap-5">
+            <div>
+                <h1 class="text-2xl">Experienced</h1>
+                <p class="text-xl font-bold" id="experience"></p>
+            </div>
+            <div>
+                <h1 class="text-2xl">Team Player</h1>
+                <p class="text-xl font-bold" id="referrals"></p>
+            </div>
+        </div>
+        <div class="relative flex justify-center pt-6 mb-5">
+            <img src="/shanecalypso.JPG" class="rounded-xl h-1/2 w-1/2" />
+        </div>
+        <div class="w-full h-4 bg-black"></div>
+    </div>
+</div>
+
+<style>
+    #anim-p {
+        animation: type 1s forwards 1s ease-out;
+    }
+    #border-path {
+        animation: draw 1s forwards 1s ease-out;
+    }
+    @keyframes draw {
+        to {
+            stroke-dashoffset: 0;
+        }
+    }
+</style>
+
+<script>
+    function updatePath() {
+        const textMain = document.querySelector("#anim-p") as HTMLElement;
+        const path = document.querySelector("#border-path") as SVGPathElement;
+
+        if (textMain && path) {
+            path.setAttribute(
+                "d",
+                `M0,0 V${textMain.offsetHeight} H${textMain.offsetWidth} v${
+                    textMain.offsetHeight / 2
+                }`
+            );
+        }
+        const pathLength = path.getTotalLength();
+        path.style.strokeDasharray = pathLength.toString();
+        path.style.strokeDashoffset = pathLength.toString();
+    }
+
+    function incrementCounter(
+        selector: string,
+        current: number,
+        target: number,
+        duration: number,
+        letter: string = ""
+    ) {
+        let counter = document.getElementById(selector);
+        let steptime = Math.abs(Math.floor(duration / target));
+        if (current < target && counter) {
+            current++;
+            counter.innerText = current.toString() + letter;
+            setTimeout(
+                () =>
+                    incrementCounter(
+                        selector,
+                        current,
+                        target,
+                        duration,
+                        letter
+                    ),
+                steptime
+            );
+        }
+    }
+
+    // increment
+    incrementCounter("experience", 0, 5, 1000, " years of SaaS Experience");
+    incrementCounter(
+        "referrals",
+        0,
+        10,
+        1000,
+        " Professional LinkedIn Referrals"
+    );
+
+    window.addEventListener("DOMContentLoaded", updatePath);
+    window.addEventListener("resize", updatePath);
+</script>
